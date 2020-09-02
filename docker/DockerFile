@@ -7,7 +7,9 @@ ENV HOME=/home
 
 #USER root
 WORKDIR $HOME
-COPY ./env.yml /$HOME/
-COPY ./build_env.sh
+COPY ./environment.yml /$HOME/
+COPY ./build_env.sh /$HOME/
+COPY ./../results /$HOME/
+COPY ./../src /$HOME/
 RUN sh build_env.sh
-CMD ["python", "src/run.py"]
+CMD ["python", "src/deployment/app.py"]
