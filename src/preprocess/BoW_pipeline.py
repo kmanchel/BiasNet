@@ -4,8 +4,10 @@ import pdb
 import argparse
 
 sys.path.append("../..")
-from data.raw import DATA_PATH
 import nltk
+
+nltk.download("stopwords")
+nltk.download("wordnet")
 import datetime, pickle, codecs
 import re
 import string

@@ -19,8 +19,9 @@
 
     <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}" method="post">
-      <textarea type="text" name="text" placeholder="Text" required="required" size="1000" />
-      <button type="submit" class="btn btn-primary btn-block btn-large">Detect</button>
+      <input type="text" name="text" placeholder="Article" required="required" />
+
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
 
     <br>

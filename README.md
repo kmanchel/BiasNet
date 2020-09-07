@@ -7,19 +7,25 @@ Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
 ├── LICENSE
 ├── Makefile
 ├── README.md
+├── bin
+│   └── create-conda-env.sh
 ├── data
 │   ├── external
 │   ├── interim
 │   ├── processed
 │   └── raw
-│       └── __init__.py
+│       ├── __init__.py
+│       └── __pycache__
+├── doc
 ├── docker
-│   ├── DockerFile
-│   ├── build_env.sh
-│   └── environment.yml
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── entrypoint.sh
 ├── docs
+├── environment.yml
 ├── notebooks
 │   └── LR_BoW.ipynb
+├── requirements.txt
 ├── results
 │   ├── models
 │   │   ├── BoW_tokens.pkl
@@ -40,7 +46,16 @@ Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
 │   │   └── logisticRegression_BoW.py
 │   └── preprocess
 │       ├── BoW_pipeline.py
+│       ├── __pycache__
 │       └── pipeline.joblib
 └── tools
 
+```
+
+## API Deployment
+
+To deploy the app using Docker, please execute the following commands:
+```commandline
+cd ./docker
+docker-compose up --build
 ```

@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  biasnet:
+  BiasNet:
     build:
       args:
         - username=${USER}
@@ -10,7 +10,7 @@ services:
       context: ../
       dockerfile: docker/Dockerfile
     ports:
-      - "8888:8888"
+      - "5000:5000"
     volumes:
       - ../bin:/home/${USER}/app/bin
       - ../data:/home/${USER}/app/data

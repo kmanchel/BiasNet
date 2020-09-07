@@ -49,10 +49,6 @@ def predict_api():
 
 
 if __name__ == "__main__":
-    pipeline = BoW_Test(
-        tokens_path="/Users/kmanchel/Documents/GitHub/BiasNet/results/models/BoW_tokens.pkl"
-    )
-    model = joblib.load(
-        "/Users/kmanchel/Documents/GitHub/BiasNet/results/models/LR_BoW_test.joblib"
-    )
-    app.run(debug=True)
+    pipeline = BoW_Test(tokens_path="./results/models/BoW_tokens.pkl")
+    model = joblib.load("./results/models/LR_BoW_test.joblib")
+    app.run(host="0.0.0.0", debug=True)
