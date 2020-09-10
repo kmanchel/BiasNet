@@ -1,0 +1,17 @@
+{
+    "learning_rate": 1e-5,
+    "batch_size": 500,
+    "num_epochs": 8,
+    "reg_scale": 1e-4,
+    "epochs": 4,
+    "MAX_SENTENCE_LENGTH": 50,
+    "MAX_SENTENCE_COUNT": 15,
+    "rnn_type": "GRU",
+    "word_embedding_type": "pre_trained",
+    "model_type": "HAN",
+    "unclean_dataset": "sep_oct_lemmatized.csv",
+    "clean_dataset_train": "train.csv",
+    "clean_dataset_val": "val.csv",
+    "embedding_matrix": "embedding_mat.p",
+    "tokenizer_file": "tokenizer_3.p"
+}
