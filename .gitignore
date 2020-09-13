@@ -95,9 +95,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# VSCode
+.vscode
 
 # Rope project settings
 .ropeproject
