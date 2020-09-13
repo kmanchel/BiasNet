@@ -32,7 +32,6 @@ if __name__ == "__main__":
     i = 0
     print("\nTokenizer saved as %s"%params.tokenizer_file)
     while i<=necessary_its:
-        
         for batch, _ in tqdm(iterator):
             batch = np.char.decode(batch.numpy().astype(np.bytes_), 'UTF-8')
             tokenizer.fit_on_texts(batch)
