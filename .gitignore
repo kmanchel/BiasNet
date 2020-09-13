@@ -1,6 +1,9 @@
 # Datasets
 *.csv
 *.sqlite3
+*.npy
+*.txt
+
 
 
 # Byte-compiled / optimized / DLL files
@@ -106,3 +109,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# personal 
+archive/
+results/hierarchical_attention/model_checkpoints/*
+results/hierarchical_attention/model_checkpoints/

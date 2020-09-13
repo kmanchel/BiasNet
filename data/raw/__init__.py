@@ -1,1 +1,0 @@
-DATA_PATH = '/Users/kmanchel/Documents/Project_code_PoliticalBias/sep_oct.csv'

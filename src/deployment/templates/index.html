@@ -14,11 +14,12 @@
 </head>
 
 <body>
-  <div class="login">
-    <h1>Detect Political Bias</h1>
-
+  <div class="testbox">
+    <h1 style="color:rgb(200,000,100)">BiasNet</h1>
+    <h4>Prediction Service</h4>
     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}" method="post">
+    <form action="{{ url_for('predict_UI')}}" method="post">
+      <input type="text" name="model_id" placeholder="Model ID" required="required" />
       <input type="text" name="text" placeholder="Article" required="required" />
 
       <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
@@ -27,10 +28,7 @@
     <br>
     <br>
     {{ prediction_text }}
-
   </div>
-
-
 </body>
 
 </html>
