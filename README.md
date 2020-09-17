@@ -74,7 +74,7 @@ RESPONSE:
 ```
 The API expects a model_id which specifies what model to use, and the text to be processed and predicted on.
 
-Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://github.com/kmanchel/BiasNet/blob/master/src/models/BoW) (ii) [Hierarchical Attention Networks for Document Classification](https://github.com/kmanchel/BiasNet/blob/master/src/models/hierarchical_attention)
+Models currently available are (**TO BE UPDATED**): (ID:1) [Bag Of Words](https://github.com/kmanchel/BiasNet/blob/master/src/models/BoW) (ID:2) [Hierarchical Attention Networks for Document Classification](https://github.com/kmanchel/BiasNet/blob/master/src/models/hierarchical_attention)
 
 
 ## Layout
