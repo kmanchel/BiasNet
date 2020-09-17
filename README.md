@@ -156,9 +156,9 @@ Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://g
 
 ## References
 
-https://library.cscc.edu/mediabias/detectors 
-https://www.aclweb.org/anthology/S19-2145.pdf 
-https://pdfs.semanticscholar.org/7238/baa75e78838398a03aa705742004ab068d35.pdf?_ga=2.84089053.57717742.1596399737-319321172.1594922709
-https://pdfs.semanticscholar.org/dfe0/4e7e8fe9776e1623a5e9ce99ca4757181e5f.pdf?_ga=2.155824383.57717742.1596399737-319321172.1594922709
-https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf
-https://www.aclweb.org/anthology/P14-1105.pdf
+- https://library.cscc.edu/mediabias/detectors 
+- https://www.aclweb.org/anthology/S19-2145.pdf 
+- https://pdfs.semanticscholar.org/7238/baa75e78838398a03aa705742004ab068d35.pdf?_ga=2.84089053.57717742.1596399737-319321172.1594922709
+- https://pdfs.semanticscholar.org/dfe0/4e7e8fe9776e1623a5e9ce99ca4757181e5f.pdf?_ga=2.155824383.57717742.1596399737-319321172.1594922709
+- https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf
+- https://www.aclweb.org/anthology/P14-1105.pdf
