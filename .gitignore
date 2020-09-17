@@ -97,6 +97,8 @@ celerybeat.pid
 
 # VSCode
 *.vscode
+.vscode/
+.vscode
 
 # Rope project settings
 .ropeproject
