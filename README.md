@@ -1,7 +1,7 @@
 # BiasNet
 Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
 
-**PLEASE NOTE THAT THE FOLLOWING REPOSITORY IS UNDERGOING CONTINUOUS UPDATES**
+**Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](## Feature Backlog) for upcoming updates. **
 
 ## Deployment (Using Docker)
 
@@ -148,6 +148,11 @@ Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://g
 
 ```
 
+## Feature Backlog
+
+1. Monitoring System (training, deployment, inference)
+2. BERT Base Model
+3. Structured Prediction: Targeted Sentiment Analysis
 
 ## References
 
