@@ -1,8 +1,10 @@
 # BiasNet
 **Machine Learning as a microservice on Political Bias and Hyperpartisan Detection**
 
-<span style="color:red;">Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](#Feature-Backlog) for upcoming updates.<\span>
-
+<div class="text-red mb-2">
+  Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](#Feature-Backlog) for upcoming updates.
+</div>
+ 
 ## Deployment (Using Docker)
 
 To deploy the app using Docker, please execute the following commands:
