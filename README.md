@@ -1,7 +1,7 @@
 # BiasNet
 Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
 
-**Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](##Feature Backlog) for upcoming updates.**
+**Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](#Feature-Backlog) for upcoming updates.**
 
 ## Deployment (Using Docker)
 
