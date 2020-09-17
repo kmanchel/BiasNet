@@ -153,6 +153,7 @@ Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://g
 1. Monitoring System (training, deployment, inference)
 2. BERT Base Model
 3. Structured Prediction: Targeted Sentiment Analysis
+4. Training Data (.sqlite3) DB access (AWS) 
 
 ## References
 
