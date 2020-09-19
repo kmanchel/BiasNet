@@ -96,9 +96,9 @@ celerybeat.pid
 *.sage.py
 
 # VSCode
-*.vscode
-.vscode/
 .vscode
+.vscode/
+
 
 # Rope project settings
 .ropeproject
