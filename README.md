@@ -1,8 +1,9 @@
 # BiasNet
-Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
+**Machine Learning as a microservice on Political Bias and Hyperpartisan Detection**
 
-**PLEASE NOTE THAT THE FOLLOWING REPOSITORY IS UNDERGOING CONTINUOUS UPDATES**
+*Please note the following repo is undergoing continuous updates. Please refer to the [Feature Backlog](#Feature-Backlog) for upcoming updates.*
 
+ 
 ## Deployment (Using Docker)
 
 To deploy on docker with a GPU runtime, please execute the following commands:
@@ -82,7 +83,7 @@ RESPONSE:
 ```
 The API expects a model_id which specifies what model to use, and the text to be processed and predicted on.
 
-Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://github.com/kmanchel/BiasNet/blob/master/src/models/BoW) (ii) [Hierarchical Attention Networks for Document Classification](https://github.com/kmanchel/BiasNet/blob/master/src/models/hierarchical_attention)
+Models currently available are (**TO BE UPDATED**): (ID:1) [Bag Of Words](https://github.com/kmanchel/BiasNet/blob/master/src/models/BoW) (ID:2) [Hierarchical Attention Networks for Document Classification](https://github.com/kmanchel/BiasNet/blob/master/src/models/hierarchical_attention)
 
 
 ## Layout
@@ -157,12 +158,18 @@ Models currently available are (**TO BE UPDATED**): (i) [Bag Of Words](https://g
 
 ```
 
+## Feature Backlog
+
+1. Monitoring System (training, deployment, inference)
+2. BERT Base Model
+3. Structured Prediction: Targeted Sentiment Analysis
+4. Training Data (.sqlite3) DB access (AWS) 
 
 ## References
 
-https://library.cscc.edu/mediabias/detectors 
-https://www.aclweb.org/anthology/S19-2145.pdf 
-https://pdfs.semanticscholar.org/7238/baa75e78838398a03aa705742004ab068d35.pdf?_ga=2.84089053.57717742.1596399737-319321172.1594922709
-https://pdfs.semanticscholar.org/dfe0/4e7e8fe9776e1623a5e9ce99ca4757181e5f.pdf?_ga=2.155824383.57717742.1596399737-319321172.1594922709
-https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf
-https://www.aclweb.org/anthology/P14-1105.pdf
+- https://library.cscc.edu/mediabias/detectors 
+- https://www.aclweb.org/anthology/S19-2145.pdf 
+- https://pdfs.semanticscholar.org/7238/baa75e78838398a03aa705742004ab068d35.pdf?_ga=2.84089053.57717742.1596399737-319321172.1594922709
+- https://pdfs.semanticscholar.org/dfe0/4e7e8fe9776e1623a5e9ce99ca4757181e5f.pdf?_ga=2.155824383.57717742.1596399737-319321172.1594922709
+- https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf
+- https://www.aclweb.org/anthology/P14-1105.pdf
