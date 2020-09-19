@@ -5,15 +5,19 @@ Machine Learning as a microservice on Political Bias and Hyperpartisan Detection
 
 ## Deployment (Using Docker)
 
-To deploy the app using Docker, please execute the following commands:
+To deploy on docker with a GPU runtime, please execute the following commands:
 ```commandline
-cd ./docker
+cd ./docker-gpu
 docker-compose up --build
 ```
-
+Likewise, to deploy on docker with a CPU runtime, please execute the following commands:
+```commandline
+cd ./docker-cpu
+docker-compose up --build
+```
 ## Running locally
 
-To reproduce/run the code, you would have to do the following:
+To reproduce/run the app, you would have to do the following:
 
 1. Clone Repo in your chosen directory
 ```commandline
@@ -24,8 +28,13 @@ git pull origin master
 ```
 
 2. Build and activate conda environment
+If you would like to your GPU:
 ```commandline
-sh bin/create-conda-env.sh
+sh bin/create-env-gpu.sh
+```
+else you may use the CPU environment:
+```commandline
+sh bin/create-env-cpu.sh
 ```
 
 3. Run Flask App
@@ -38,7 +47,7 @@ python deployment/app.py
 
 The App may be used through the API (https:0.0.0.0/predict_API) or through the Web app (https:0.0.0.0/predict_UI)
 
-The API Body (**TO BE UPDATED**) is as follows:
+The API Body (**WILL BE UPDATED**) is as follows:
 
 ```commandline
 REQUEST:

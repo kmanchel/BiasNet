@@ -1,9 +1,0 @@
-name: NattyLang
-channels:
-  - defaults
-dependencies:
-  - pip=20.0.2=py36_1
-  - pip:
-      - -r file:requirements.txt
-  - python=3.6
-prefix: NattyLang
