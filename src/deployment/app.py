@@ -5,6 +5,8 @@ import pdb
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 import numpy as np
 from flask import Flask, request, jsonify, render_template
+from monitoring.middleware import setup_metrics
+import traceback
 import joblib
 import pickle
 import tensorflow as tf
@@ -14,6 +16,7 @@ from preprocess.hierarchical_attention.han_pipeline import HAN_DataLoader
 from models.hierarchical_attention.han import HAN_Model
 
 app = Flask(__name__)
+setup_metrics(app)
 
 
 @app.route("/")

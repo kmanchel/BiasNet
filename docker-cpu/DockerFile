@@ -30,9 +30,9 @@ RUN adduser --disabled-password \
 
 #Copying over config files
 COPY environment_cpu.yml requirements.txt /tmp/
-RUN chown $UID:$GID /tmp/environment.yml /tmp/requirements.txt
+RUN chown $UID:$GID /tmp/environment_cpu.yml /tmp/requirements.txt
 
-COPY docker/entrypoint.sh /usr/local/bin/
+COPY docker-cpu/entrypoint.sh /usr/local/bin/
 RUN chown $UID:$GID /usr/local/bin/entrypoint.sh && \
     chmod u+x /usr/local/bin/entrypoint.sh
 
@@ -64,7 +64,7 @@ WORKDIR $PROJECT_DIR
 ENV ENV_PREFIX $PROJECT_DIR/env
 
 RUN conda update --name base --channel defaults conda && \
-    conda env create --prefix $ENV_PREFIX --file /tmp/environment.yml && \
+    conda env create --prefix $ENV_PREFIX --file /tmp/environment_cpu.yml && \
     conda clean --all --yes
 
 # use an entrypoint script to insure conda environment is properly activated at runtime
