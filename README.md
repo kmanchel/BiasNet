@@ -160,10 +160,10 @@ Models currently available are (**TO BE UPDATED**): (ID:1) [Bag Of Words](https:
 
 ## Feature Backlog
 
-1. Monitoring System (training, deployment, inference)
-2. BERT Base Model
-3. Structured Prediction: Targeted Sentiment Analysis
-4. Training Data (.sqlite3) DB access (AWS) 
+1. Test Suite: unit tests, component tests, API tests (IN PROGRESS)
+2. BERT Base Model (TO DO)
+3. Structured Prediction: Targeted Sentiment Analysis (TO DO)
+4. Training Data (.sqlite3) DB access (TO DO)
 
 ## References
 
