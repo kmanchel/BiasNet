@@ -10,7 +10,7 @@ from distutils.util import strtobool
 from io import StringIO
 from pathlib import Path
 
-from .file_utils import (
+from file_utils import (
     _datasets_available,
     _faiss_available,
     _tf_available,

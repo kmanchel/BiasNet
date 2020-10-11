@@ -1,7 +1,7 @@
 import unittest
 import sys, os
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/src/")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from file_utils import is_tf_available
 from testing_utils import require_tf
 
@@ -27,38 +27,74 @@ if is_tf_available():
 
 @require_tf
 class TestHANLoader(unittest.TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         """
         Loads
         """
-        self.tmp_path = "~/BiasNet/test/tmp/"
-        build_params = {
-            "train_path": "~/BiasNet/test/fixtures/test.csv",
-            "val_path": "~/BiasNet/test/fixtures/test.csv",
-            "batch_size": 512,
+        self.tmp_path = os.path.dirname(os.path.abspath(__file__)) + "/tmp/"
+        print("tmp path:", self.tmp_path)
+        if not os.path.exists(self.tmp_path):
+            os.mkdir(self.tmp_path)
+
+        train_path = os.path.dirname(os.path.abspath(__file__)) + "/fixtures/test.csv"
+        print("train path:", train_path)
+        val_path = os.path.dirname(os.path.abspath(__file__)) + "/fixtures/test.csv"
+        checkpoint_path = (
+            os.path.dirname(os.path.abspath(__file__)) + "/fixtures/model_checkpoints/weights"
+        )
+        build_config = {
+            "train_path": train_path,
+            "val_path": val_path,
+            "batch_size": 5,
             "MAX_SENTENCE_LENGTH": 50,
             "MAX_SENTENCE_COUNT": 15,
-            "tokenizer_save_path": self.tmp + "tokenizer.pkl",
+            "tokenizer_save_path": self.tmp_path + "tokenizer.pkl",
             "embedding_dims": 300,
-            "pretrained_embedding_path": self.tmp + "glove.840B.300d.txt",
-            "embeddings_save_path": self.tmp + "hierarchical_attention/embedding_matrix.npy",
-            "model_save_path": self.tmp + "hierarchical_attention/model_checkpoints/weights",
-            "model_history_path": self.tmp + "/hierarchical_attention/history.pkl",
-            "learning_rate": 1e-5,
-            "num_epochs": 8,
-            "reg_scale": 1e-4,
+            "pretrained_embedding_path": os.path.dirname(os.path.abspath(__file__))
+            + "/fixtures/glove.840B.300d.txt",
+            "embeddings_save_path": self.tmp_path + "hierarchical_attention/embedding_matrix.npy",
+            "model_save_path": checkpoint_path,
+            "model_history_path": self.tmp_path + "hierarchical_attention/history.pkl",
             "epochs": 1,
             "rnn_type": "GRU",
-            "word_embedding_type": "pre_trained",
-            "model_type": "HAN",
         }
-        self.pipeline_params = Params(build_params)
+        with open(self.tmp_path + "config.json", "w") as fp:
+            json.dump(build_config, fp)
 
-    def tearDown(self):
+        self.pipeline_params = Params(self.tmp_path + "config.json")
+        device = tf.config.experimental.list_physical_devices("GPU")[0].name
+        train_params = {
+            "initiate_model": True,
+            "device": device,
+            "learning_rate": 0.001,
+            "decay": 0.0001,
+            "dropout": 0.25,
+            "num_epochs": 3,
+            "metric": "Accuracy",
+            "check_every": 50,
+            "val_batch_num": 1,
+        }
+        self.compile_params = {
+            "initiate_model": True,
+            "device": device,
+            "learning_rate": 0.001,
+            "decay": 0.0001,
+            "dropout": 0.25,
+            "num_epochs": 1,
+            "metric": "Accuracy",
+            "check_every": 50,
+            "val_batch_num": 1,
+        }
+
+        print("SETUP DONE")
+
+    @classmethod
+    def tearDownClass(cls):
         """
         Clears up tmp directory
         """
-        cmd1 = "cd {}".format(self.tmp)
+        cmd1 = "cd {}".format(self.tmp_path)
         os.system(cmd1)
         os.system("rm -rf *")
 
@@ -94,3 +130,7 @@ class TestHANLoader(unittest.TestCase):
 
     def test_encoder_fn(self):
         pass
+
+
+if __name__ == "__main__":
+    unittest.main()

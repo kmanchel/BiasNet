@@ -28,11 +28,9 @@ from tqdm.auto import tqdm
 import requests
 from filelock import FileLock
 
-from . import __version__
-from .utils import logging
+from logging import getLogger, DEBUG, INFO, WARNING, ERROR
 
-
-logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
+logger = getLogger(__name__)  # pylint: disable=invalid-name
 
 try:
     USE_TF = os.environ.get("USE_TF", "AUTO").upper()

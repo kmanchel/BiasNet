@@ -14,7 +14,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import string
-from preprocess.utils import Params, get_dataset, fix_fn, _py_fn, load_subword_embedding, normalize
+from utils import Params, get_dataset, fix_fn, _py_fn, load_subword_embedding, normalize
 import pdb
 
 
@@ -82,12 +82,10 @@ class HAN_DataLoader:
             for batch, _ in tqdm(train_iterator, "fitting tokenizer"):
                 batch = np.char.decode(batch.numpy().astype(np.bytes_), "UTF-8")
                 tokenizer.fit_on_texts(batch)
-
-                if save_path != None:
-                    if iteration_count % (max_iterations // 4) == 0:
-                        with open(self.params.tokenizer_save_path, "wb") as fp:
-                            pickle.dump(tokenizer, fp, protocol=pickle.HIGHEST_PROTOCOL)
-                        print("Tokenizer saved as %s" % self.params.tokenizer_save_path)
+                if iteration_count % (max_iterations // 4) == 0:
+                    with open(self.params.tokenizer_save_path, "wb") as fp:
+                        pickle.dump(tokenizer, fp, protocol=pickle.HIGHEST_PROTOCOL)
+                    print("Tokenizer saved as %s" % self.params.tokenizer_save_path)
                 iteration_count += 1
                 if iteration_count == max_iterations:
                     break
@@ -107,10 +105,11 @@ class HAN_DataLoader:
             Training
         """
         if not os.path.exists(self.params.embeddings_save_path):
+            print(">>>>>>>>>", self.params.embeddings_save_path)
             embeddings_matrix = load_subword_embedding(
                 tokenizer.word_index,
-                self.params.pretrained_embedding_path,
-                self.params.embeddings_save_path,
+                emb_path=self.params.pretrained_embedding_path,
+                save_path=self.params.embeddings_save_path,
             )
         else:
             embeddings_matrix = np.load(self.params.embeddings_save_path)

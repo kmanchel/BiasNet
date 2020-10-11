@@ -3,9 +3,9 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
-sys.path.append(os.getcwd() + "/../")
-sys.path.append(os.getcwd() + "/preprocess")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../preprocess/")
+# sys.path.append(os.getcwd() + "/../")
+# sys.path.append(os.getcwd() + "/preprocess")
 
 import datetime, pickle, os, codecs, re, string
 import tensorflow as tf
@@ -41,7 +41,7 @@ class HAN_Model:
     def __init__(self, params, train_mode=True):
 
         self.logger = getLogger(__name__)
-        self.logger.setLevel(DEBUG)
+        self.logger.setLevel(INFO)
 
         self.params = params
         self.train_mode = train_mode
@@ -114,10 +114,12 @@ class HAN_Model:
             dropout = tf.keras.layers.Dropout(0.1)(embedded_word_seq)
 
         if self.params.rnn_type is "GRU":
+            self.logger.info("GRU MODEL")
             word_encoder = tf.keras.layers.Bidirectional(
                 tf.compat.v1.keras.layers.CuDNNGRU(50, return_sequences=True)
             )(dropout)
         else:
+            self.logger.info("LSTM MODEL")
             word_encoder = tf.keras.layers.Bidirectional(
                 tf.keras.layers.LSTM(50, return_sequences=True, dropout=compile_params["dropout"])
             )(embedded_word_seq)
