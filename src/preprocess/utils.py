@@ -96,10 +96,11 @@ def load_subword_embedding(word_index, emb_path, save_path=None):
         word_index: (tf.keras.utils.preprocessing.Tokenizer.word_index)
         emb_path: (str) path to the pretrained word embedding
     Return:
-        embedding_matrix: (np.array, shape = (N, like word embedding), dtype = float32)
+        embedding_matrix: (np.array, shape = (N, like word embeddsing), dtype = float32)
     """
 
     if not os.path.exists(emb_path):
+        print("!!!!!!! ", emb_path)
         os.system('wget "http://www-nlp.stanford.edu/data/glove.840B.300d.zip"')
         os.system("unzip glove.840B.300d.zip")
         os.system("rm glove.840B.300d.zip")

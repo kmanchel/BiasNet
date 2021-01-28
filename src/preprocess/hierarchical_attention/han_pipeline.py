@@ -14,7 +14,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import string
-from preprocess.utils import Params, get_dataset, fix_fn, _py_fn, load_subword_embedding, normalize
+from utils import Params, get_dataset, fix_fn, _py_fn, load_subword_embedding, normalize
 import pdb
 
 
@@ -37,6 +37,8 @@ class HAN_DataLoader:
                             - tokenizer_save_path: absolute path to where tokenizer will be saved for later use.
                             - pretrained_embedding_path: absolute path to where pretrained embeddings can be found.
                             - embeddings_save_path: absolute path to where embedding matrix is to be saved for later use.
+
+            train (bool): Train mode or test mode.
         """
 
         self.params = pipeline_params
@@ -45,12 +47,26 @@ class HAN_DataLoader:
             self._init_train()
 
     def _init_train(self):
+        """
+        Sets up (tf.data) Data loaders for training and validation sets
+        Usage:
+            Train
+        """
         print("Loaded Training Articles from %s" % self.params.train_path)
         self.train = get_dataset(self.params.train_path, self.params.batch_size).map(fix_fn)
         print("Loaded Validation Articles from %s" % self.params.val_path)
         self.val = get_dataset(self.params.val_path, self.params.batch_size).map(fix_fn)
 
     def _train_tokenizer(self, max_iterations=100):
+        """
+        Builds tokenizer from the training set
+        Args:
+            max_iterations (int): Number of batches to scan through for tokens
+        Returns:
+            tokenizer (tf.keras.preprocessing.text.Tokenizer)
+        Usage:
+            Train
+        """
         if os.path.exists(self.params.tokenizer_save_path):
             pickle_in = open(self.params.tokenizer_save_path, "rb")
             tokenizer = pickle.load(pickle_in)
@@ -66,12 +82,10 @@ class HAN_DataLoader:
             for batch, _ in tqdm(train_iterator, "fitting tokenizer"):
                 batch = np.char.decode(batch.numpy().astype(np.bytes_), "UTF-8")
                 tokenizer.fit_on_texts(batch)
-
-                if save_path != None:
-                    if iteration_count % (max_iterations // 4) == 0:
-                        with open(self.params.tokenizer_save_path, "wb") as fp:
-                            pickle.dump(tokenizer, fp, protocol=pickle.HIGHEST_PROTOCOL)
-                        print("Tokenizer saved as %s" % self.params.tokenizer_save_path)
+                if iteration_count % (max_iterations // 4) == 0:
+                    with open(self.params.tokenizer_save_path, "wb") as fp:
+                        pickle.dump(tokenizer, fp, protocol=pickle.HIGHEST_PROTOCOL)
+                    print("Tokenizer saved as %s" % self.params.tokenizer_save_path)
                 iteration_count += 1
                 if iteration_count == max_iterations:
                     break
@@ -81,26 +95,57 @@ class HAN_DataLoader:
             return tokenizer
 
     def _create_embedding_matrix(self, tokenizer):
+        """
+        Loads pretrained GloVe embeddings and embeds tokens with corresponding embeddings
+        Args:
+            tokenizer (tf.keras.preprocessing.text.Tokenizer): Trained on texts.
+        Returns:
+            embeddings_matrix (np.array): subset of embeddings corresponding to tokens.
+        Usage:
+            Training
+        """
         if not os.path.exists(self.params.embeddings_save_path):
+            print(">>>>>>>>>", self.params.embeddings_save_path)
             embeddings_matrix = load_subword_embedding(
                 tokenizer.word_index,
-                self.params.pretrained_embedding_path,
-                self.params.embeddings_save_path,
+                emb_path=self.params.pretrained_embedding_path,
+                save_path=self.params.embeddings_save_path,
             )
         else:
             embeddings_matrix = np.load(self.params.embeddings_save_path)
         return embeddings_matrix
 
     def _load_tokenizer(self):
+        """
+        Loads previously trained tokenizer from specified location
+        Usage:
+            Test
+        """
         pickle_in = open(self.params.tokenizer_save_path, "rb")
         tokenizer = pickle.load(pickle_in)
         return tokenizer
 
     def _load_embedding_matrix(self):
+        """
+        Loads previously trained embeddings matrix from specified location
+        Usage:
+            Test
+        """
         embeddings_matrix = np.load(self.params.embeddings_save_path)
         return embeddings_matrix
 
     def _encoder_fn(self, __tokenizer):
+        """
+        Creates a pipeline function to be applied to data loader
+        Pipeline performs embedding and padding tasks (sentence and word padding).
+        Args:
+            __tokenizer (tf.keras.preprocessing.text.Tokenizer): Trained on texts.
+        Returns:
+            encode_texts_fn (fn): Pipeline Function.
+        Usage:
+            Train
+            Test
+        """
         params = self.params
 
         @_py_fn
@@ -128,6 +173,11 @@ class HAN_DataLoader:
         return encode_texts_fn
 
     def build(self):
+        """
+        Main method for Training
+        Usage:
+            Train
+        """
         tokenizer = self._train_tokenizer()
         embedding_matrix = self._create_embedding_matrix(tokenizer)
         encoder_fn = self._encoder_fn(tokenizer)
@@ -138,20 +188,25 @@ class HAN_DataLoader:
         return train_loader, val_loader, tokenizer, embedding_matrix
 
     def load(self):
+        """
+        Main method for Testing/Prediction
+        Usage:
+            Test
+        """
         tokenizer = self._load_tokenizer()
         embedding_matrix = self._load_embedding_matrix()
 
         return tokenizer, embedding_matrix
 
 
-if __name__ == "__main__":
-    pipeline_params = Params(
-        "/home/kmanchel/Documents/GitHub/BiasNet/results/hierarchical_attention/params.json"
-    )
+# if __name__ == "__main__":
+#     pipeline_params = Params(
+#         "/home/kmanchel/Documents/GitHub/BiasNet/results/hierarchical_attention/params.json"
+#     )
 
-    pipeline = HAN_DataLoader(pipeline_params)
+#     pipeline = HAN_DataLoader(pipeline_params)
 
-    train, val, tokenizer, embedding_matrix = pipeline.build()
+#     train, val, tokenizer, embedding_matrix = pipeline.build()
 
-    x, y = next(iter(train))
-    pdb.set_trace()
+#     x, y = next(iter(train))
+#     pdb.set_trace()

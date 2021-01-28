@@ -2,8 +2,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import os
 import sys
 
-sys.path.append(os.getcwd() + "/../")
-sys.path.append(os.getcwd() + "/preprocess")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../preprocess/")
 
 import logging
 from logging import getLogger, DEBUG, INFO, WARNING, ERROR
@@ -32,5 +32,5 @@ train_params = {
     "check_every": 50,
     "val_batch_num": 1,
 }
-
+pdb.set_trace()
 tf_model, history = model.train(train_params)
